@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.git.hui.boot.redis.mapper.SiteVisitTotalMapper" >
+  <resultMap id="BaseResultMap" type="com.git.hui.boot.redis.entity.SiteVisitTotal" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="APP_NAME" property="appName" jdbcType="VARCHAR" />
+    <result column="URI" property="uri" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="TINYINT" />
+    <result column="URI_TAG" property="uriTag" jdbcType="VARCHAR" />
+    <result column="INITIAL_VISIT" property="initialVisit" jdbcType="BIGINT" />
+    <result column="VISIT_VALUE" property="visitValue" jdbcType="BIGINT" />
+    <result column="END_VISIT" property="endVisit" jdbcType="BIGINT" />
+    <result column="CALC_DATE" property="calcDate" jdbcType="DATE" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="LASTUPDATE_DATE" property="lastupdateDate" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="TINYINT" />
+  </resultMap>
+
+  <select id="selectRecentEndVisitValue" resultMap="BaseResultMap">
+    SELECT END_VISIT FROM bus_site_visit_total_t WHERE TYPE = #{type} AND URI = #{uri} AND STATUS = 1 ORDER BY CALC_DATE DESC LIMIT 1
+  </select>
+</mapper>
